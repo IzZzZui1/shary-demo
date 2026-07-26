@@ -99,7 +99,7 @@
   .gallery-loading { text-align: center; color: var(--ink-muted); font-size: 13.5px; padding: 20px; }
 
   /* ---------- horizontal strip (нижняя галерея) ---------- */
-  .strip-wrap { position: relative; }
+  .strip-wrap { position: relative; padding: 0 52px; }
   .gallery-strip {
     display: flex; gap: 16px; overflow-x: auto; scroll-behavior: smooth;
     scroll-snap-type: x proximity; padding: 6px 2px 16px;
@@ -118,10 +118,10 @@
     transition: background .15s ease, transform .15s ease;
   }
   .strip-nav:hover { background: var(--accent); color: #fff; }
-  .strip-nav.prev { left: -8px; }
-  .strip-nav.next { right: -8px; }
+  .strip-nav.prev { left: 2px; }
+  .strip-nav.next { right: 2px; }
   .strip-hint { text-align: center; color: var(--ink-muted); font-size: 12.5px; margin-top: 6px; }
-  @media (max-width: 720px) { .strip-nav { display: none; } }
+  @media (max-width: 720px) { .strip-nav { display: none; } .strip-wrap { padding: 0; } }
 
   /* ---------- о студии ---------- */
   #about { position: relative; overflow: hidden; }
@@ -155,8 +155,23 @@
   .rating-box .big { font-size: 27px; font-weight: 800; color: #F5C451; }
   .rating-box .stars { color: #F5C451; font-size: 17px; letter-spacing: 1px; }
   .rating-box .count { color: #D9CFCA; font-size: 13px; }
-  .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 18px; }
+  .reviews-strip {
+    display: flex; align-items: flex-start; gap: 14px; overflow-x: auto; scroll-behavior: smooth;
+    scroll-snap-type: x proximity; padding: 6px 2px 10px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin; scrollbar-color: var(--accent-soft) transparent;
+  }
+  .reviews-strip::-webkit-scrollbar { height: 8px; }
+  .reviews-strip::-webkit-scrollbar-thumb { background: var(--accent-soft); border-radius: var(--r-pill); }
+  .reviews-strip::-webkit-scrollbar-track { background: transparent; }
   .review-card { background: var(--bg); border-radius: var(--r-card); padding: 20px 22px; box-shadow: var(--shadow); }
+  .reviews-strip .review-card { flex: 0 0 265px; scroll-snap-align: start; padding: 15px 17px; }
+  .reviews-strip .review-card .stars { margin-bottom: 7px; }
+  .reviews-strip .review-card p {
+    font-size: 13.5px; line-height: 1.5; margin: 0 0 9px;
+    display: -webkit-box; -webkit-line-clamp: 6; line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .reviews-strip .review-card .meta { font-size: 12px; }
   .review-card .stars { color: #F5C451; font-size: 13px; display: block; margin-bottom: 10px; }
   .review-card p { font-style: italic; margin: 0 0 12px; font-size: 14.5px; color: var(--ink); line-height: 1.55; }
   .review-card .meta { font-size: 12.5px; color: var(--ink-muted); }
@@ -274,38 +289,12 @@
       <span class="stars">★★★★★</span>
       <span class="count">на основании 63 оценок</span>
     </div>
-    <div class="review-grid">
-      <div class="review-card">
-        <span class="stars">★★★★★</span>
-        <p>«Заказывали набор воздушных шаров на выписку. Работа выполнена на отлично. Результат превзошел все ожидания, будем обращаться»</p>
-        <div class="meta"><b>Ксения</b> · 7 мая · сделка состоялась</div>
-      </div>
-      <div class="review-card">
-        <span class="stars">★★★★★</span>
-        <p>«СПАСИБО! Шары заказали к 25 января, сегодня 5 марта, уже больше месяца шары все также висят у потолка»</p>
-        <div class="meta"><b>Нинель</b> · 5 марта · сделка состоялась</div>
-      </div>
-      <div class="review-card">
-        <span class="stars">★★★★★</span>
-        <p>«Спасибо за шарики для выпускного в садике) спасибо что доставили в удобное для нас время, очень благодарны!»</p>
-        <div class="meta"><b>Маргарита</b> · 28 мая · сделка состоялась</div>
-      </div>
-      <div class="review-card">
-        <span class="stars">★★★★★</span>
-        <p>«Хочется сказать огромное спасибо за помощь в оказание подарка на день рождение.»</p>
-        <div class="meta"><b>Влад Хуртин</b> · 7 июля · сделка состоялась</div>
-      </div>
-      <div class="review-card">
-        <span class="stars">★★★★★</span>
-        <p>«Заказывала здесь первый раз и была приятно удивлена: цены приемлимые, отличное оформление, пунктуальность при доставке.»</p>
-        <div class="meta"><b>Ольга</b> · 19 апреля · сделка состоялась</div>
-      </div>
-      <div class="review-card">
-        <span class="stars">★★★★★</span>
-        <p>«Обычно не пишу отзывы, но в этот раз очень захотелось поблагодарить! Заказывал шары для сестры и остался максимально доволен.»</p>
-        <div class="meta"><b>Евгений</b> · 22 апреля · сделка состоялась</div>
-      </div>
+    <div class="strip-wrap">
+      <button class="strip-nav prev" id="revPrev" aria-label="Предыдущие отзывы">‹</button>
+      <div class="reviews-strip" id="reviewsStrip"></div>
+      <button class="strip-nav next" id="revNext" aria-label="Следующие отзывы">›</button>
     </div>
+    <p class="strip-hint">← листайте отзывы →</p>
   </div>
 </section>
 
@@ -360,9 +349,21 @@
 </footer>
 
 <script src="catalog.js"></script>
+<script src="reviews.js"></script>
 <script>
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+  }
+
+  // Прокрутка ленты стрелками ‹ › (переиспользуется галереей и отзывами)
+  function wireStripArrows(stripId, prevId, nextId) {
+    const strip = document.getElementById(stripId);
+    if (!strip) return;
+    const step = () => Math.max(strip.clientWidth * 0.8, 220);
+    const prev = document.getElementById(prevId);
+    const next = document.getElementById(nextId);
+    if (prev) prev.addEventListener('click', () => strip.scrollBy({ left: -step(), behavior: 'smooth' }));
+    if (next) next.addEventListener('click', () => strip.scrollBy({ left: step(), behavior: 'smooth' }));
   }
 
   function statusClass(status) {
@@ -396,13 +397,24 @@
     renderGallery('bottomGalleryGrid', rest);
     document.getElementById('bottomGalleryCount').textContent =
       'Листайте влево или вправо, чтобы посмотреть все работы';
-
-    // прокрутка ленты стрелками
-    const strip = document.getElementById('bottomGalleryGrid');
-    const step = () => Math.max(strip.clientWidth * 0.8, 220);
-    document.getElementById('stripPrev').addEventListener('click', () => strip.scrollBy({ left: -step(), behavior: 'smooth' }));
-    document.getElementById('stripNext').addEventListener('click', () => strip.scrollBy({ left: step(), behavior: 'smooth' }));
+    wireStripArrows('bottomGalleryGrid', 'stripPrev', 'stripNext');
   } else {
     document.getElementById('topGalleryGrid').innerHTML = '<div class="gallery-loading">catalog.js не найден</div>';
+  }
+
+  // ----- отзывы (лента, данные из reviews.js) -----
+  function reviewHtml(r) {
+    const stars = '★'.repeat(r.stars || 5);
+    return `
+      <div class="review-card">
+        <span class="stars">${stars}</span>
+        <p>«${escapeHtml(r.text)}»</p>
+        <div class="meta"><b>${escapeHtml(r.author)}</b> · ${escapeHtml(r.date)}</div>
+      </div>`;
+  }
+
+  if (typeof reviews !== 'undefined') {
+    document.getElementById('reviewsStrip').innerHTML = reviews.map(reviewHtml).join('');
+    wireStripArrows('reviewsStrip', 'revPrev', 'revNext');
   }
 </script>
