@@ -187,6 +187,44 @@
   details.faq-item[open] summary::after { content: "–"; }
   details.faq-item p { margin: 12px 0 0; font-size: 14.5px; color: var(--ink-muted); }
 
+  /* ---------- how-to-order ---------- */
+  .howto { background: var(--bg); }
+  .howto-grid {
+    display: flex; gap: 16px;
+    max-width: 960px; margin: 0 auto;
+    position: relative;
+  }
+  .howto-step {
+    flex: 1; min-width: 0;
+    background: var(--bg-soft); border-radius: var(--r-card); padding: 28px 16px 24px;
+    text-align: center; position: relative;
+  }
+  .howto-step .num {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--accent); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 18px;
+    margin: 0 auto 14px;
+  }
+  .howto-step h3 { font-size: 14px; margin: 0 0 8px; color: var(--ink); }
+  .howto-step p { font-size: 13px; color: var(--ink-muted); margin: 0; line-height: 1.5; }
+  .howto-step p b { color: var(--ink); font-weight: 600; }
+  .howto-step + .howto-step::before {
+    content: "›";
+    position: absolute;
+    left: -14px; top: 50%; transform: translateY(-50%);
+    color: var(--accent-soft);
+    font-size: 24px; font-weight: 300;
+    pointer-events: none;
+  }
+  @media (max-width: 860px) {
+    .howto-step + .howto-step::before { display: none; }
+  }
+  @media (max-width: 640px) {
+    .howto-grid { flex-direction: column; gap: 12px; }
+    .howto-step { padding: 22px 18px 20px; }
+  }
+
   /* ---------- order ---------- */
   .order-section { background: var(--bg-cream); text-align: center; }
   .order-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 4px; }
@@ -220,15 +258,15 @@
   <div class="wrap">
     <div class="eyebrow">Воздушные шары на заказ</div>
     <h1>Оформление шарами, которое запомнится</h1>
-    <p class="lead">Собираем красивые наборы шаров к любому вашему празднику. Если повод уже сегодня, чаще всего успеваем собрать в тот же день. Напишите нам, и мы подскажем, что можно сделать.</p>
+    <p class="lead">Собираем красивые композиции шаров к любому вашему празднику. Если повод уже сегодня, чаще всего успеваем собрать в тот же день. Напишите нам, и мы подскажем, что можно сделать.</p>
     <a class="btn btn-primary" href="#order">Заказать оформление</a>
-    <div><span class="rating-pill"><span class="stars">★★★★★</span> 5.0 · 63 отзыва на Авито</span></div>
+    <div><span class="rating-pill"><span class="stars">★★★★★</span> 5.0 на Авито</span></div>
   </div>
 </section>
 
 <section class="soft" id="top-gallery">
   <div class="wrap">
-    <h2 class="section-title">Наши лучшие работы</h2>
+    <h2 class="section-title">Наши работы</h2>
     <p class="section-sub">Несколько композиций, с которых стоит начать знакомство</p>
     <div class="gallery-grid" id="topGalleryGrid">
       <div class="gallery-loading">Загружаем модели…</div>
@@ -287,7 +325,7 @@
     <div class="rating-box">
       <span class="big">5.0</span>
       <span class="stars">★★★★★</span>
-      <span class="count">на основании 63 оценок</span>
+      <span class="count">Что пишут наши клиенты</span>
     </div>
     <div class="strip-wrap">
       <button class="strip-nav prev" id="revPrev" aria-label="Предыдущие отзывы">‹</button>
@@ -314,6 +352,35 @@
         <summary>Есть ли в наличии нужный мне шар или оформление?</summary>
         <p>Каждый заказ мы собираем под ваш повод, поэтому просто расскажите, что вы задумали, и мы подскажем, как это можно сделать. А ещё вы можете посмотреть примеры готовых работ в нашей галерее.</p>
       </details>
+    </div>
+  </div>
+</section>
+
+<section class="howto" id="howto">
+  <div class="wrap">
+    <h2 class="section-title">Как заказать</h2>
+    <p class="section-sub">Всё просто: выбираете, пишете, забираете</p>
+    <div class="howto-grid">
+      <div class="howto-step">
+        <div class="num">1</div>
+        <h3>Выберите композицию</h3>
+        <p>Посмотрите наши работы в каталоге выше или опишите своё пожелание — мы соберём оформление под ваш повод и настроение.</p>
+      </div>
+      <div class="howto-step">
+        <div class="num">2</div>
+        <h3>Напишите Насте</h3>
+        <p>Сейчас мы принимаем заказы через профиль на <b>Авито</b>. Напишите нам там, и мы ответим в ближайшее время. Telegram, VK и MAX добавим позже.</p>
+      </div>
+      <div class="howto-step">
+        <div class="num">3</div>
+        <h3>Согласуйте детали</h3>
+        <p>Обсудим состав, цветовую гамму и дату. Если праздник уже сегодня — чаще всего успеваем собрать заказ день в день, уточните у Насти.</p>
+      </div>
+      <div class="howto-step">
+        <div class="num">4</div>
+        <h3>Заберите шары</h3>
+        <p>Самовывоз или доставка — подробности уточняйте при заказе. Мы всё красиво упакуем, чтобы композиция доехала в целости.</p>
+      </div>
     </div>
   </div>
 </section>
